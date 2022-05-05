@@ -6,11 +6,26 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 13:34:59 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/03 18:42:38 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/05 22:43:35 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+void	ft_free_array(char	**option)
+{
+	char	**tmp;
+
+	if (!option)
+		return ;
+	tmp = option;
+	while (*tmp)
+	{
+		free(*tmp);
+		tmp++;
+	}
+	free(option);
+}
 
 void	ft_argv_error(char *cmd)
 {
@@ -21,36 +36,28 @@ void	ft_argv_error(char *cmd)
 
 int ft_exist_error(char *infile)
 {
-    write(2, "pipex: ", 7);
-    write(2, "No such file or directory: ", 28);
-    write(2, infile, ft_strlen(infile));
-    write(2, "\n", 1);
-        return (-1);
+	write(2, "pipex: ", 7);
+	write(2, "No such file or directory: ", 28);
+	write(2, infile, ft_strlen(infile));
+	write(2, "\n", 1);
+	return (false);
 }
 
 int ft_perm_error(char *file)
 {
-    write(2, "pipex: ", 7);
-    write(2, "permission denied: ", 19);
-    write(2, file, ft_strlen(file));
-    write(2, "\n", 1);
-    return (-1);
+	write(2, "pipex: ", 7);
+	write(2, "permission denied: ", 19);
+	write(2, file, ft_strlen(file));
+	write(2, "\n", 1);
+	return (false);
 }
 
 int ft_read_infile(char *infile)
 {
-    if (access(infile, F_OK) == -1)
-        return (ft_exist_error(infile));
-    else if (access(infile, R_OK) == -1)
-        return (ft_perm_error(infile));
-    else
-        return (open(infile, O_RDONLY));
+	return (open(infile, O_RDONLY));
 }
 
 int ft_read_outfile(char *outfile)
 {
-    if (access(outfile, F_OK) == 0 && access(outfile, W_OK) == -1)
-        return (ft_perm_error(outfile));
-    else
-        return (open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644));
+	return (open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644));
 }

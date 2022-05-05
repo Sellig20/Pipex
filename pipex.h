@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:49:26 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/03 18:58:24 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/05 22:19:44 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdbool.h>
+
+# define IN 0
+# define OUT 1
 
 typedef struct s_data {
 	int		pipe_fd[2];
@@ -42,6 +46,8 @@ char	**ft_get_path(char **env);
 char	**ft_split_path(char **paths);
 void	ft_parent(t_data *x, char **argv, char *env[]);
 void	pipex(t_data *x, char **argv, char *env[]);
+char	*ft_path_command(char	*cmd, char **env);
+char	**ft_get_command(char *cmd, char	*pc);
 
 //////////TOOLS//////////
 void	ft_argv_error(char *cmd);
@@ -49,9 +55,10 @@ int ft_exist_error(char *infile);
 int ft_perm_error(char *file);
 int ft_read_infile(char *infile);
 int ft_read_outfile(char *outfile);
+void	ft_free_array(char	**option);
 
 //////////CHILDS FUNCTIONS//////////
-void ft_child_one(t_data *x, char *cmd, char **env);
-void ft_child_two(t_data *x, char *cmd, char **env);
+void ft_child_one(t_data *x, char *pc, char **option, char **env);
+void ft_child_two(t_data *x, char *pc, char **option, char **env);
 
 #endif

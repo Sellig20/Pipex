@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_splitc.c                                        :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:18:42 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/04/20 17:59:06 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/05 22:21:21 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+
+
+char	**free_split(char **str, int count)
+{
+	while (0 <= count)
+	{
+		free(str[count]);
+		count--;
+	}
+	free(str);
+	return (NULL);
+}
 
 int	ft_is_charset(char c, char *charset)
 {
@@ -107,3 +120,4 @@ char	**ft_split(char *str, char *charset)
 	tab = ft_m_and_copy(str, charset, tab, wc);
 	return (tab);
 }
+

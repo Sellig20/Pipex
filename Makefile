@@ -6,7 +6,7 @@
 #    By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 13:33:46 by jecolmou          #+#    #+#              #
-#    Updated: 2022/05/03 19:00:01 by jecolmou         ###   ########.fr        #
+#    Updated: 2022/05/05 22:42:02 by jecolmou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJS					=	${SRCS:.c=.o}
 
 CC						=	clang
 
-CFLAGS					=	-Wall -Wextra -Werror -g
+CFLAGS					=	-Wall -Wextra -Werror -g3
 
 RM						=	rm -rf
 

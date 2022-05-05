@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:08:06 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/03 18:29:56 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/05 22:43:50 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,49 +61,65 @@ char	**ft_split_path(char **paths)
 	return (res);
 }*/
 
-void	ft_parent(t_data *x, char **argv, char *env[])
+void	ft_parent(t_data *x, char **argv, char **env)
 {
-	int	status;
+	char	*pc;
+	char	**option;
 
-	if (pipe(x->pipe_fd) == -1)
-		return (perror("pipe: "));
+	pc = ft_path_command(argv[2], env);
+	option = ft_get_command(argv[2], pc);
 	x->child1 = fork();
 	if (x->child1 < 0)
 		return (perror("fork: "));
 	if (x->child1 == 0)
+		ft_child_one(x, pc, option, env);
+	else
 	{
-		ft_child_one(x, argv[2], env);
-		waitpid(x->child1, &status, 0);
+		waitpid(x->child1, NULL, 0);
+		close(x->pipe_fd[1]);//close 6
+		close(x->f1);// close 3
 	}
-	close(x->pipe_fd[1]);
-	close(x->f1);
+	ft_free_array(option);
+	pc = ft_path_command(argv[3], env);
+	option = ft_get_command(argv[3], pc);
 	x->child2 = fork();
 	if (x->child2 < 0)
 		return (perror("fork: "));
 	if (x->child2 == 0)
-	{
-		ft_child_two(x, argv[3], env);
-		waitpid(x->child2, &status, 0);
+		ft_child_two(x, pc, option, env);
+	else{
+		waitpid(x->child2, NULL, 0);
+		close(x->pipe_fd[0]);//on close 5
+		close(x->f2);// on close 4
 	}
-	close(x->pipe_fd[0]);
-	close(x->f2);
+	ft_free_array(option);
 }
 
-void	pipex(t_data *x, char **argv, char *env[])
+void	pipex(t_data *x, char **argv, char **env)
 {
+	if (pipe(x->pipe_fd) == -1)
+		return (perror("pipe: "));
 	ft_parent(x, argv, env);
 }
 
-int	main(int argc, char **argv, char *env[])
+int	main(int argc, char **argv, char **env)
 {
 	t_data	x;
 
 	if (argc != 5)
 		return (write(2, "Invalid number of arguments.\n", 27));
 	x.f1 = ft_read_infile(argv[1]);
+	if (x.f1 == -1)
+	{
+		ft_exist_error(argv[1]);
+		return (EXIT_FAILURE);
+	}
 	x.f2 = ft_read_outfile(argv[4]);
-	if (x.f1 < 0 || x.f2 < 0)
-		exit(EXIT_FAILURE);
+	if (x.f2 < 0)
+	{
+		ft_exist_error(argv[1]);
+		return (EXIT_FAILURE);
+	}
 	pipex(&x, argv, env);
-	return (0);
+	return (EXIT_SUCCESS);
 }
