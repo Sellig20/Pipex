@@ -6,13 +6,18 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 13:34:59 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/04/30 15:45:14 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/03 18:42:38 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-
+void	ft_argv_error(char *cmd)
+{
+	write(2, "zsh: command not found: ", 24);
+	ft_putstr_fd(cmd, 2);
+	write(2, "\n", 1);
+}
 
 int ft_exist_error(char *infile)
 {

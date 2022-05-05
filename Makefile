@@ -6,42 +6,46 @@
 #    By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 13:33:46 by jecolmou          #+#    #+#              #
-#    Updated: 2022/04/30 15:38:47 by jecolmou         ###   ########.fr        #
+#    Updated: 2022/05/03 19:00:01 by jecolmou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME            =       pipex
+NAME					=	pipex
 
-SRCS            =		pipex.c \
-						libft/ft_split.c \
-						libft/ft_strnstr.c \
-						libft/ft_strjoin.c \
-						libft/ft_strlen.c \
-						childs.c \
-						tools.c \
+SRCS					=	pipex.c \
+							libft/ft_split.c \
+							libft/ft_strnstr.c \
+							libft/ft_strjoin.c \
+							libft/ft_strlen.c \
+							libft/ft_putstr_fd.c \
+							childs.c \
+							tools.c \
 
-OBJS            =       ${SRCS:.c=.o}
+OBJS					=	${SRCS:.c=.o}
 
-CC                      =       gcc
+CC						=	clang
 
-CFLAGS          		=       -Wall -Wextra -Werror
+CFLAGS					=	-Wall -Wextra -Werror -g
 
-RM                      =       rm -rf
+RM						=	rm -rf
 
-all:	${NAME}
+all		:	${NAME}
 
-$(NAME): $(OBJS)
+$(NAME)	:	$(OBJS)
 		$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c
+%.o		:	%.c
 		$(CC) $(CFLAGS)	-c	$<	-o	$@
 
-clean:
+clean	:
 		${RM}	${OBJS}
 
-fclean: clean
+fclean	:	clean
 		${RM}	${NAME}
 
 re:	fclean	all
+
+malloc_test: $(OBJS)
+	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJS} -L. -lmallocator
 
 .PHONY:	all	clean	fclean	re
