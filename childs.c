@@ -6,22 +6,49 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:52:14 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/05 22:44:38 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:37:56 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+#include <string.h>
+
+void	ft_free_arrayy(char	*option)
+{
+	int i = 0;
+
+	if (!option)
+		return ;
+	while (option[i])
+	{
+		free(option);
+		i++;
+	}
+	free(option);
+}
 
 char	**ft_get_command(char *cmd, char *pc)
 {
 	char	**command;
 	char	*tmp;
 
+	if (!cmd || !pc)
+		return (NULL);
 	command = ft_split(cmd, " ");
-	tmp = command[0];
-	command[0] = pc;
-	free(tmp);
-	return (command);
+	if (!command)
+	{
+		ft_free_array(command);
+		return (NULL);
+	}
+	else
+	{
+		tmp = command[0];
+		command[0] = pc;
+		free(tmp);
+		return (command);
+	}
+	ft_free_array(command);
+	return (NULL);
 }
 
 char	*ft_path_command(char	*cmd, char **env)
@@ -33,7 +60,11 @@ char	*ft_path_command(char	*cmd, char **env)
 	int i;
 
 	path = ft_get_path(env);
+	if (path == NULL)
+		ft_free_array(path);
 	command = ft_split(cmd, " ");
+	if (command == NULL)
+		ft_free_array(command);
 	i = 0;
 	while (path[i])
 	{
@@ -49,14 +80,15 @@ char	*ft_path_command(char	*cmd, char **env)
 		free(pc);
 		i++;
 	}
-	if (access(pc, X_OK) != 0)
-			ft_argv_error(cmd);
-	free(pc);
-	return (NULL);
+	ft_argv_error(cmd);
+	ft_free_array(command);
+	ft_free_array(path);
+	return (strdup("fakepath"));
 }
 
 void ft_child_one(t_data *x, char *pc, char **option, char **env)
 {
+	(void)env;
 	close(x->f2);
 	close(x->pipe_fd[IN]);
 	if (x->f1 != STDIN_FILENO)
@@ -69,7 +101,14 @@ void ft_child_one(t_data *x, char *pc, char **option, char **env)
 		dup2(x->pipe_fd[OUT], STDOUT_FILENO);
 		close(x->pipe_fd[OUT]);
 	}
-	execve(pc, option, env);
+	if (strcmp(pc, "fakepath") != 0)
+		execve(pc, option, env);
+	else
+	{
+		free(pc);
+	}
+	//if (execve(pc, option, env) == -1)
+	//	perror("execve\n");
 	exit(127);
 }
 
@@ -86,6 +125,8 @@ void ft_child_two(t_data *x, char *pc, char **option, char **env)
 		close(x->f2);
 	}
 	execve(pc, option, env);
+	//if (execve(pc, option, env) == -1)
+	//	perror("execve\n");
 	exit(127);
 }
 

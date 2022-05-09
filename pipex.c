@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:08:06 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/05 22:43:50 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:37:41 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	**ft_get_path(char **env)
 {
- int        i;
-    char    **paths;
+	int        i;
+	char    **paths;
 
     i = 0;
     while (env[i])
@@ -24,6 +24,7 @@ char	**ft_get_path(char **env)
         {
             paths = ft_split(env[i], "=:");
             return (paths);
+			ft_free_array(paths);
         }
         i++;
     }
@@ -68,11 +69,20 @@ void	ft_parent(t_data *x, char **argv, char **env)
 
 	pc = ft_path_command(argv[2], env);
 	option = ft_get_command(argv[2], pc);
+	if (option == NULL)
+		ft_free_array(option);
 	x->child1 = fork();
 	if (x->child1 < 0)
+	{
+		ft_free_array(option);
+		free(pc);
 		return (perror("fork: "));
+	}
 	if (x->child1 == 0)
+	{
 		ft_child_one(x, pc, option, env);
+		ft_free_array(option);
+	}
 	else
 	{
 		waitpid(x->child1, NULL, 0);
@@ -84,10 +94,18 @@ void	ft_parent(t_data *x, char **argv, char **env)
 	option = ft_get_command(argv[3], pc);
 	x->child2 = fork();
 	if (x->child2 < 0)
+	{
+		ft_free_array(option);
+		free(pc);
 		return (perror("fork: "));
+	}
 	if (x->child2 == 0)
+	{
 		ft_child_two(x, pc, option, env);
-	else{
+		ft_free_array(option);
+	}
+	else
+	{
 		waitpid(x->child2, NULL, 0);
 		close(x->pipe_fd[0]);//on close 5
 		close(x->f2);// on close 4

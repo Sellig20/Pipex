@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:18:42 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/05 22:21:21 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/09 19:00:57 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,11 @@ char	**ft_m_and_copy(char *str, char *charset, char **tab, int wc)
 	{
 		k = 0;
 		tab[j] = malloc(sizeof(char) * (ft_length_word(&str[i], charset) + 1));
-		if (!tab[j])
+		if (tab[j] == NULL)
+		{
+			free_split(tab, j);
 			return (NULL);
+		}
 		while (ft_is_charset(str[i], charset) && str[i])
 			i++;
 		while (!ft_is_charset(str[i], charset) && str[i])
@@ -115,9 +118,9 @@ char	**ft_split(char *str, char *charset)
 	tab = malloc(sizeof(char *) * (wc + 1));
 	if (tab == NULL)
 	{
+		ft_free_array(tab);
 		return (NULL);
 	}
 	tab = ft_m_and_copy(str, charset, tab, wc);
 	return (tab);
 }
-
