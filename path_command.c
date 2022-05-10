@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:50:50 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 12:52:01 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:35:56 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,27 @@
 
 char	**ft_get_path(char **env)
 {
-	int        i;
-	char    **paths;
+	int		i;
+	char	**paths;
+	char	**tmp;
 
-    i = 0;
-    while (env[i])
-    {
-        if (ft_strnstr(env[i], "PATH=", 5))
-        {
-            paths = ft_split(env[i], "=:");
-            return (paths);
-			ft_free_array(paths);
-        }
-        i++;
-    }
-    return (NULL);
+	i = 0;
+	if (!env)
+		return (NULL);
+	while (env[i])
+	{
+		if (ft_strnstr(env[i], "PATH=", 5))
+		{
+			tmp = ft_split(env[i], '=');
+			if (!tmp)
+				return (NULL);
+			paths = ft_split(tmp[1], ':');
+			ft_free_array(tmp);
+			return (paths);
+		}
+		i++;
+	}
+	return (NULL);
 }
 
 char	**ft_get_command(char *cmd, char *pc)
@@ -38,11 +44,11 @@ char	**ft_get_command(char *cmd, char *pc)
 
 	if (!cmd || !pc)
 		return (NULL);
-	command = ft_split(cmd, " ");
+	command = ft_split(cmd, ' ');
 	if (!command)
 	{
-		ft_free_array(command);
-		return (NULL);
+		free(pc);
+		return (0);
 	}
 	tmp = command[0];
 	command[0] = pc;
@@ -50,20 +56,25 @@ char	**ft_get_command(char *cmd, char *pc)
 	return (command);
 }
 
-char	*ft_path_command(char	*cmd, char **env)
+char	*ft_path_command(char *cmd, char **env)
 {
 	char	**path;
 	char	**command;
 	char	*pc;
 	char	*tmp;
-	int i;
+	int		i;
 
+	if (!cmd || !env)
+		return (NULL);
 	path = ft_get_path(env);
 	if (path == NULL)
-		ft_free_array(path);
-	command = ft_split(cmd, " ");
+		return (0);
+	command = ft_split(cmd, ' ');
 	if (command == NULL)
-		ft_free_array(command);
+	{
+		ft_free_array(path);
+		return (0);
+	}
 	i = 0;
 	while (path[i])
 	{

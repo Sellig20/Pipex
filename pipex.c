@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:08:06 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 12:52:13 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:35:36 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	pipex(t_data *x, char **argv, char **env)
 int	main(int argc, char **argv, char **env)
 {
 	t_data	x;
-	(void)env;
 
 	if (argc != 5)
 		return (write(2, "Invalid number of arguments.\n", 27));

@@ -6,13 +6,13 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:52:14 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 12:51:05 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 14:34:38 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void ft_child_one(t_data *x, char *pc, char **option, char **env)
+void	ft_child_one(t_data *x, char *pc, char **option, char **env)
 {
 	close(x->f2);
 	close(x->pipe_fd[IN]);
@@ -33,7 +33,7 @@ void ft_child_one(t_data *x, char *pc, char **option, char **env)
 	exit(127);
 }
 
-void ft_child_two(t_data *x, char *pc, char **option, char **env)
+void	ft_child_two(t_data *x, char *pc, char **option, char **env)
 {
 	if (x->pipe_fd[IN] != STDIN_FILENO)
 	{

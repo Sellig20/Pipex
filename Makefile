@@ -6,7 +6,7 @@
 #    By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 13:33:46 by jecolmou          #+#    #+#              #
-#    Updated: 2022/05/10 12:54:47 by jecolmou         ###   ########.fr        #
+#    Updated: 2022/05/10 17:22:04 by jecolmou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS					=	pipex.c \
 							childs.c \
 							path_command.c \
 							tools.c \
+							free.c \
 							libft/ft_split.c \
 							libft/ft_strnstr.c \
 							libft/ft_strjoin.c \

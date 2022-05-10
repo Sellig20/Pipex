@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parents.c                                          :+:      :+:    :+:   */
+/*   parent.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:51:46 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 12:52:15 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 17:19:49 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,18 @@ void	ft_parent(t_data *x, char **argv, char **env)
 {
 	char	*pc;
 	char	**option;
+	int		status;
 
+	status = 0;
 	pc = ft_path_command(argv[2], env);
+	if (!pc)
+		return ;
 	option = ft_get_command(argv[2], pc);
 	if (option == NULL)
+	{
 		ft_free_array(option);
+		return ;
+	}
 	x->child1 = fork();
 	if (x->child1 < 0)
 	{
@@ -34,12 +41,14 @@ void	ft_parent(t_data *x, char **argv, char **env)
 	}
 	else
 	{
-		waitpid(x->child1, NULL, 0);
-		close(x->pipe_fd[1]);//close 6
-		close(x->f1);// close 3
+		waitpid(x->child1, &status, 0);
+		close(x->pipe_fd[1]);
+		close(x->f1);
 	}
 	ft_free_array(option);
 	pc = ft_path_command(argv[3], env);
+	if (!pc)
+		return ;
 	option = ft_get_command(argv[3], pc);
 	x->child2 = fork();
 	if (x->child2 < 0)
@@ -54,9 +63,9 @@ void	ft_parent(t_data *x, char **argv, char **env)
 	}
 	else
 	{
-		waitpid(x->child2, NULL, 0);
-		close(x->pipe_fd[0]);//on close 5
-		close(x->f2);// on close 4
+		waitpid(x->child2, &status, 0);
+		close(x->pipe_fd[0]);
+		close(x->f2);
 	}
 	ft_free_array(option);
 }

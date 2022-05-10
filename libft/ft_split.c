@@ -6,11 +6,51 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:18:42 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 10:34:30 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 16:48:11 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+static int	ft_word_len(char const *s, char c)
+{
+	int	len;
+	int	i;
+
+	i = 0;
+	len = 0;
+	while (s[i] == c)
+		i++;
+	while (s[i] && s[i] != c)
+	{
+		i++;
+		len++;
+	}
+	return (len);
+}
+
+static int	ft_count_word(char const *s, char c)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	if (!s)
+		return (-1);
+	while (s[i])
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		if (s[i] && s[i] != c)
+		{
+			count++;
+			while (s[i] != c && s[i])
+				i++;
+		}
+	}
+	return (count);
+}
 
 char	**free_split(char **str, int count)
 {
@@ -23,101 +63,36 @@ char	**free_split(char **str, int count)
 	return (NULL);
 }
 
-int	ft_is_charset(char c, char *charset)
+char	**ft_cut(char **tab, int i)
 {
-	int	i;
-
-	i = 0;
-	while (charset[i])
-	{
-		if (c == charset[i])
-			return (1);
-		i++;
-	}
-	return (0);
+	free_split(tab, i);
+	return (NULL);
 }
 
-int	ft_number_word(char *str, char *charset)
+char	**ft_split(char const *s, char c)
 {
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		while (ft_is_charset(str[i], charset) && str[i])
-			i++;
-		if (!ft_is_charset(str[i], charset) && str[i])
-		{
-			count++;
-			while (!ft_is_charset(str[i], charset) && str[i])
-				i++;
-		}
-	}
-	return (count);
-}
-
-int	ft_length_word(char *str, char *charset)
-{
-	int	i;
-	int	wl;
-
-	i = 0;
-	wl = 0;
-	while (ft_is_charset(str[i], charset) && str[i])
-		i++;
-	while (!ft_is_charset(str[i], charset) && str[i])
-	{
-		wl++;
-		i++;
-	}
-	return (wl);
-}
-
-char	**ft_m_and_copy(char *str, char *charset, char **tab, int wc)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	while (j < wc)
-	{
-		k = 0;
-		tab[j] = malloc(sizeof(char) * (ft_length_word(&str[i], charset) + 1));
-		if (tab[j] == NULL)
-			return (NULL);
-		while (ft_is_charset(str[i], charset) && str[i])
-			i++;
-		while (!ft_is_charset(str[i], charset) && str[i])
-		{
-			tab[j][k] = str[i];
-			k++;
-			i++;
-		}
-		tab[j][k] = '\0';
-		j++;
-	}
-	tab[j] = NULL;
-	return (tab);
-}
-
-char	**ft_split(char *str, char *charset)
-{
-	int		wc;
 	char	**tab;
-	char	**tmp;
+	int		i;
+	int		j;
+	int		k;
 
-	wc = ft_number_word(str, charset);
-	tmp = malloc(sizeof(char *) * (wc + 1));
-	if (tmp == NULL)
-	{
-		ft_free_array(tmp);
+	i = -1;
+	k = 0;
+	tab = malloc((ft_count_word(s, c) + 1) * sizeof(char *));
+	if (!tab || !s)
 		return (NULL);
+	while (++i < ft_count_word(s, c))
+	{
+		j = 0;
+		tab[i] = malloc((ft_word_len(&s[k], c) + 1) * sizeof(char));
+		if (tab[i] == NULL)
+			tab = ft_cut(tab, i);
+		while (s[k] == c && s[k])
+			k++;
+		while (s[k] != c && s[k])
+			tab[i][j++] = s[k++];
+		tab[i][j] = '\0';
 	}
-	tmp = ft_m_and_copy(str, charset, tmp, wc);
-	tab = tmp;
+	tab[i] = NULL;
 	return (tab);
 }
