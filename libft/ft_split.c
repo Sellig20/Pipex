@@ -6,13 +6,11 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:18:42 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/09 19:00:57 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 10:34:30 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
-
-
 
 char	**free_split(char **str, int count)
 {
@@ -90,10 +88,7 @@ char	**ft_m_and_copy(char *str, char *charset, char **tab, int wc)
 		k = 0;
 		tab[j] = malloc(sizeof(char) * (ft_length_word(&str[i], charset) + 1));
 		if (tab[j] == NULL)
-		{
-			free_split(tab, j);
 			return (NULL);
-		}
 		while (ft_is_charset(str[i], charset) && str[i])
 			i++;
 		while (!ft_is_charset(str[i], charset) && str[i])
@@ -113,14 +108,16 @@ char	**ft_split(char *str, char *charset)
 {
 	int		wc;
 	char	**tab;
+	char	**tmp;
 
 	wc = ft_number_word(str, charset);
-	tab = malloc(sizeof(char *) * (wc + 1));
-	if (tab == NULL)
+	tmp = malloc(sizeof(char *) * (wc + 1));
+	if (tmp == NULL)
 	{
-		ft_free_array(tab);
+		ft_free_array(tmp);
 		return (NULL);
 	}
-	tab = ft_m_and_copy(str, charset, tab, wc);
+	tmp = ft_m_and_copy(str, charset, tmp, wc);
+	tab = tmp;
 	return (tab);
 }

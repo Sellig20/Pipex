@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 13:34:59 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/09 19:07:08 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 11:34:22 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	ft_free_array(char	**option)
 {
 	char	**tmp;
 
-	if (!option)
-		return ;
 	tmp = option;
 	while (*tmp)
 	{

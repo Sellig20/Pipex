@@ -6,20 +6,24 @@
 #    By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 13:33:46 by jecolmou          #+#    #+#              #
-#    Updated: 2022/05/05 22:42:02 by jecolmou         ###   ########.fr        #
+#    Updated: 2022/05/10 12:54:47 by jecolmou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME					=	pipex
 
 SRCS					=	pipex.c \
+							parent.c \
+							childs.c \
+							path_command.c \
+							tools.c \
 							libft/ft_split.c \
 							libft/ft_strnstr.c \
 							libft/ft_strjoin.c \
 							libft/ft_strlen.c \
 							libft/ft_putstr_fd.c \
-							childs.c \
-							tools.c \
+							libft/ft_strdup.c \
+
 
 OBJS					=	${SRCS:.c=.o}
 
