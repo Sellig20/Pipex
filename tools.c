@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 13:34:59 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 17:21:13 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 18:57:06 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_argv_error(char *cmd)
 {
-	write(2, "zsh: command not found: ", 24);
+	write(2, "pipex: command not found: ", 27);
 	ft_putstr_fd(cmd, 2);
 	write(2, "\n", 1);
 }

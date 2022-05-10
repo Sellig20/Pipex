@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:52:14 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 14:34:38 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 19:11:46 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_child_one(t_data *x, char *pc, char **option, char **env)
 		dup2(x->pipe_fd[OUT], STDOUT_FILENO);
 		close(x->pipe_fd[OUT]);
 	}
-	if (strcmp(pc, "fakepath") != 0)
+
+	if (pc != NULL)
 		execve(pc, option, env);
 	free(pc);
 	free(option);
@@ -45,7 +46,7 @@ void	ft_child_two(t_data *x, char *pc, char **option, char **env)
 		dup2(x->f2, STDOUT_FILENO);
 		close(x->f2);
 	}
-	if (strcmp(pc, "fakepath") != 0)
+	if (pc != NULL)
 		execve(pc, option, env);
 	free(pc);
 	free(option);

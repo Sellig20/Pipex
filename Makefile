@@ -6,7 +6,7 @@
 #    By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 13:33:46 by jecolmou          #+#    #+#              #
-#    Updated: 2022/05/10 17:22:04 by jecolmou         ###   ########.fr        #
+#    Updated: 2022/05/10 19:25:23 by jecolmou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ SRCS					=	pipex.c \
 							libft/ft_strjoin.c \
 							libft/ft_strlen.c \
 							libft/ft_putstr_fd.c \
-							libft/ft_strdup.c \
-
+							libft/ft_strcmp.c \
 
 OBJS					=	${SRCS:.c=.o}
 

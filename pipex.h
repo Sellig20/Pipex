@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:49:26 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 17:18:38 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/10 18:29:22 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(const char *s1);
+int		ft_strcmp(const char *s1, const char *s2);
 
 //////////PIPEX//////////
 char	**ft_get_path(char **env);
