@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:49:26 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 18:29:22 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/11 11:57:12 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(const char *s1);
 int		ft_strcmp(const char *s1, const char *s2);
 
-//////////PIPEX//////////
+//////////PATH & COMMAND//////////
 char	**ft_get_path(char **env);
-char	**ft_split_path(char **paths);
-void	ft_parent(t_data *x, char **argv, char *env[]);
-void	pipex(t_data *x, char **argv, char *env[]);
-char	*ft_path_command(char	*cmd, char **env);
 char	**ft_get_command(char *cmd, char	*pc);
+char	*ft_path_command(char	*cmd, char **env);
+char 	*ft_return_pc(char **command, char **path);
 
 //////////TOOLS//////////
 void	ft_argv_error(char *cmd);
@@ -62,5 +60,11 @@ void	ft_free_array(char	**option);
 //////////CHILDS FUNCTIONS//////////
 void	ft_child_one(t_data *x, char *pc, char **option, char **env);
 void	ft_child_two(t_data *x, char *pc, char **option, char **env);
+
+//////////PARENTS FUNCTIONS//////////
+void	ft_parent_one(t_data *x, char **argv, char *env[]);
+void	ft_parent_two(t_data *x, char **argv, char **env);
+
+void	pipex(t_data *x, char **argv, char *env[]);
 
 #endif
