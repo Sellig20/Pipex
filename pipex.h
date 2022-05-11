@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:49:26 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/11 11:57:12 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/11 15:39:12 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_get_path(char **env);
 char	**ft_get_command(char *cmd, char	*pc);
 char	*ft_path_command(char	*cmd, char **env);
-char 	*ft_return_pc(char **command, char **path);
+char	*ft_return_pc(char **command, char **path);
 
 //////////TOOLS//////////
 void	ft_argv_error(char *cmd);

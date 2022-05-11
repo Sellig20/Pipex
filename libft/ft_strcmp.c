@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 19:24:09 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 19:26:16 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/11 15:39:25 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,3 @@ int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
-
