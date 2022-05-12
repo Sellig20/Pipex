@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:49:26 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/12 12:49:56 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/12 15:05:45 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(const char *s1);
 int		ft_strcmp(const char *s1, const char *s2);
+char	*ft_strstr(char *str, char *to_find);
 
 //////////PATH & COMMAND//////////
 char	**ft_get_path(char **env);

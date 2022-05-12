@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:51:46 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/12 13:23:29 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/12 18:05:28 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,33 @@ void	ft_parent_one(t_data *x, char **argv, char **env)
 {
 	char	*pc;
 	char	**option;
-
-	pc = ft_path_command(argv[2], env);
-	if (!pc)
-		return ;
-	option = ft_get_command(argv[2], pc);
+	int i = 0;
+	if (!env[i])
+	{
+		option = ft_split(argv[2], ' ');
+		if (access(option[0], X_OK) == 0)
+			pc = option[0];
+		else
+		{
+			ft_argv_error(option[0]);
+			ft_free_array(option);
+			return ;
+		}
+	}
+	else
+	{
+		option = ft_split(argv[2], ' ');
+		if (access(option[0], X_OK) == 0)
+			pc = option[0];
+		else
+		{
+			pc = ft_path_command(argv[2], env);
+			ft_free_array(option);
+			option = ft_get_command(argv[2], pc);
+		}
+	}
+	//if (!pc)
+	//	return ;
 	if (option == NULL)
 		return ;
 	x->child1 = fork();
@@ -43,6 +65,8 @@ void	ft_parent_one(t_data *x, char **argv, char **env)
 		ft_annexe_parent_one(x);
 	ft_free_array(option);
 	ft_parent_two(x, argv, env);
+
+
 }
 
 void	ft_annexe_parent_two(t_data *x)
@@ -56,11 +80,31 @@ void	ft_parent_two(t_data *x, char **argv, char **env)
 {
 	char	*pc;
 	char	**option;
-
-	pc = ft_path_command(argv[3], env);
-	if (!pc)
-		return ;
-	option = ft_get_command(argv[3], pc);
+	int i = 0;
+		if (!env[i])
+	{
+		option = ft_split(argv[3], ' ');
+		if (access(option[0], X_OK) == 0)
+			pc = option[0];
+		else
+		{
+			ft_argv_error(option[0]);
+			ft_free_array(option);
+			return ;
+		}
+	}
+	else
+	{
+		option = ft_split(argv[3], ' ');
+		if (access(option[0], X_OK) == 0)
+			pc = option[0];
+		else
+		{
+			pc = ft_path_command(argv[3], env);
+			ft_free_array(option);
+			option = ft_get_command(argv[3], pc);
+		}
+	}
 	if (option == NULL)
 		return ;
 	x->child2 = fork();
@@ -76,4 +120,11 @@ void	ft_parent_two(t_data *x, char **argv, char **env)
 		ft_annexe_parent_two(x);
 	ft_annexe_parent_two(x);
 	ft_free_array(option);
+
 }
+
+
+	/*pc = ft_path_command(argv[3], env);
+	if (!pc)
+		return ;
+	option = ft_get_command(argv[3], pc);*/

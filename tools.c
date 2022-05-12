@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 13:34:59 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/10 18:57:06 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/12 18:08:25 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,17 @@
 
 void	ft_argv_error(char *cmd)
 {
-	write(2, "pipex: command not found: ", 27);
-	ft_putstr_fd(cmd, 2);
-	write(2, "\n", 1);
+	char *tmp;
+	char *to_return;
+
+	tmp = ft_strjoin("pipex: command not found : ", cmd);
+	to_return = ft_strjoin(tmp, "\n");
+	//write(2, "pipex: command not found: ", 27);
+	//ft_putstr_fd(cmd, 2);
+	//write(2, "\n", 1);
+	write(2, to_return, ft_strlen(to_return));
+	free (to_return);
+	free(tmp);
 }
 
 int	ft_exist_error(char *infile)
