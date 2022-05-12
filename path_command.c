@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:50:50 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/11 17:29:29 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/12 13:23:19 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*ft_return_pc(char **command, char **path)
 		tmp = ft_strjoin(path[i], "/");
 		pc = ft_strjoin(tmp, command[0]);
 		free(tmp);
-		dprintf(2, "command[0] = %s\n", command[0]);
 		if (access(pc, X_OK) == 0)
 		{
 			ft_free_array(command);
