@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:51:46 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/12 18:05:28 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/14 16:48:11 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_annexe_parent_one(t_data *x)
 {
-	waitpid(x->child1, NULL, 0);
 	close(x->pipe_fd[1]);
 	close(x->f1);
 }
@@ -27,6 +26,7 @@ void	ft_parent_one(t_data *x, char **argv, char **env)
 	if (!env[i])
 	{
 		option = ft_split(argv[2], ' ');
+
 		if (access(option[0], X_OK) == 0)
 			pc = option[0];
 		else
@@ -71,9 +71,10 @@ void	ft_parent_one(t_data *x, char **argv, char **env)
 
 void	ft_annexe_parent_two(t_data *x)
 {
-	waitpid(x->child2, NULL, 0);
 	close(x->pipe_fd[0]);
 	close(x->f2);
+	waitpid(x->child1, NULL, 0);
+	waitpid(x->child2, NULL, 0);
 }
 
 void	ft_parent_two(t_data *x, char **argv, char **env)
@@ -81,8 +82,9 @@ void	ft_parent_two(t_data *x, char **argv, char **env)
 	char	*pc;
 	char	**option;
 	int i = 0;
-		if (!env[i])
+	if (!env[i])
 	{
+
 		option = ft_split(argv[3], ' ');
 		if (access(option[0], X_OK) == 0)
 			pc = option[0];
