@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:50:50 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/12 17:23:40 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/17 13:50:35 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,6 @@ char	*ft_return_pc(char **command, char **path)
 	char	*tmp;
 	int		i;
 
-	/*if (access(command[0], X_OK) == 0)
-		{
-			ft_free_array(path);
-			return (command[0]);
-		}*/
 	i = 0;
 	while (path[i])
 	{
@@ -97,7 +92,6 @@ char	*ft_path_command(char *cmd, char **env)
 	path = ft_get_path(env);
 	if (path == NULL)
 		return (0);
-	//if (ft_strstr(cmd, " "))
 	command = ft_split(cmd, ' ');
 	if (command == NULL)
 	{

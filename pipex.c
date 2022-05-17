@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:08:06 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/12 17:10:15 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/17 13:49:31 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,11 @@ void	pipex(t_data *x, char **argv, char **env)
 int	main(int argc, char **argv, char **env)
 {
 	t_data	x;
-	int i;
+	int		i;
 
 	i = 0;
 	if (argc != 5)
 		return (write(2, "Invalid number of arguments.\n", 27));
-	/*if (!env[i])
-	{
-		write(2, "Invalid (empty) global variable environment.\n", 46);
-		return (EXIT_FAILURE);
-	}*/
 	x.f1 = ft_read_infile(argv[1]);
 	if (x.f1 == -1)
 	{

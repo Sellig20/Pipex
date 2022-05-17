@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 13:49:26 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/12 15:05:45 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/17 13:46:56 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,13 @@ void	ft_child_one(t_data *x, char *pc, char **option, char **env);
 void	ft_child_two(t_data *x, char *pc, char **option, char **env);
 
 //////////PARENTS FUNCTIONS//////////
-void	ft_parent_one(t_data *x, char **argv, char *env[]);
+void	ft_parent_one(t_data *x, char **argv, char **env);
 void	ft_parent_two(t_data *x, char **argv, char **env);
+void	ft_annexe_parent_one(t_data *x);
+void	ft_annexe_parent_two(t_data *x);
+void	ft_error_child(char **option, char *pc);
+void	ft_if(char	*argv, char **pc, char ***option);
+void	ft_else(char *argv, char ***opt, char **env, char **pc);
 
 void	pipex(t_data *x, char **argv, char *env[]);
 

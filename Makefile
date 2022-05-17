@@ -6,7 +6,7 @@
 #    By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 13:33:46 by jecolmou          #+#    #+#              #
-#    Updated: 2022/05/10 19:25:23 by jecolmou         ###   ########.fr        #
+#    Updated: 2022/05/17 13:47:23 by jecolmou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME					=	pipex
 
 SRCS					=	pipex.c \
 							parent.c \
+							parents_annexe.c \
 							childs.c \
 							path_command.c \
 							tools.c \
