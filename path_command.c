@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:50:50 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/17 13:50:35 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/17 17:12:36 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ char	*ft_path_command(char *cmd, char **env)
 		return (pc);
 	ft_argv_error(cmd);
 	ft_free_array(command);
-	free(command);
 	ft_free_array(path);
 	return (NULL);
 }

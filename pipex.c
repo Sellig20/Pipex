@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 14:08:06 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/17 13:49:31 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/17 14:08:47 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv, char **env)
 	x.f2 = ft_read_outfile(argv[4]);
 	if (x.f2 < 0)
 	{
-		ft_exist_error(argv[1]);
+		ft_perm_error(argv[4]);
 		return (EXIT_FAILURE);
 	}
 	pipex(&x, argv, env);
