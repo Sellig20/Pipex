@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 13:37:07 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/19 13:51:36 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/21 15:04:52 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,12 @@ int	ft_parse(char **argv)
 	int	i;
 
 	i = 0;
-	if ((ft_strlen(argv[i]) == 0) || ft_is_space(argv[i]) == 0)
+	if ((ft_strlen(argv[i]) == 0))
+	{
+		ft_perm_error(argv[i]);
+		return (0);
+	}
+	if (ft_is_space(argv[i]) == 0)
 	{
 		ft_argv_error(argv[i]);
 		return (0);

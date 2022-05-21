@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 13:45:13 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/17 17:09:49 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/21 20:21:33 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_if(char	*argv, char **pc, char ***option)
 	else
 	{
 		ft_argv_error(*(option[0]));
-		ft_free_array(*(option));
 		return ;
 	}
 }

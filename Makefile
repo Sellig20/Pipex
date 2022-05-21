@@ -6,7 +6,7 @@
 #    By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/30 13:33:46 by jecolmou          #+#    #+#              #
-#    Updated: 2022/05/19 13:54:30 by jecolmou         ###   ########.fr        #
+#    Updated: 2022/05/21 16:18:27 by jecolmou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,18 +20,18 @@ SRCS					=	pipex.c \
 							tools.c \
 							free.c \
 							parsing.c \
-							libft/ft_split.c \
-							libft/ft_strnstr.c \
-							libft/ft_strjoin.c \
-							libft/ft_strlen.c \
-							libft/ft_putstr_fd.c \
-							libft/ft_strcmp.c \
+							utils/ft_split.c \
+							utils/ft_strnstr.c \
+							utils/ft_strjoin.c \
+							utils/ft_strlen.c \
+							utils/ft_putstr_fd.c \
+							utils/ft_strcmp.c \
 
 OBJS					=	${SRCS:.c=.o}
 
 CC						=	clang
 
-CFLAGS					=	-Wall -Wextra -Werror -g3
+CFLAGS					=	-Wall -Wextra -Werror
 
 RM						=	rm -rf
 
@@ -50,8 +50,5 @@ fclean	:	clean
 		${RM}	${NAME}
 
 re:	fclean	all
-
-malloc_test: $(OBJS)
-	$(CC) $(CFLAGS) -fsanitize=undefined -rdynamic -o $@ ${OBJS} -L. -lmallocator
 
 .PHONY:	all	clean	fclean	re

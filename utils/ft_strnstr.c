@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 15:38:33 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/12 15:05:33 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/21 16:19:47 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,4 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 		i++;
 	}
 	return (NULL);
-}
-
-char	*ft_strstr(char *str, char *to_find)
-{
-	int		i;
-	int		j;
-	char	*result;
-
-	i = 0;
-	result = 0;
-	if (to_find[0] == '\0')
-		return (str);
-	while (str[i])
-	{
-		if (str[i] == to_find[0])
-		{
-			result = str + i;
-			j = 0;
-			while (str[i + j] == to_find[j])
-			{
-				if (to_find[j + 1] == '\0')
-					return (result);
-				j++;
-			}
-			result = 0;
-		}
-		i++;
-	}
-	return (result);
 }

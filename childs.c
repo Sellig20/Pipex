@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 14:52:14 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/17 17:00:03 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/21 20:21:24 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	ft_child_one(t_data *x, char *pc, char **option, char **env)
 	}
 	if (pc != NULL)
 		execve(pc, option, env);
+	else
+		free(pc);
 	free(pc);
 	free(option);
 	exit(127);
@@ -47,6 +49,8 @@ void	ft_child_two(t_data *x, char *pc, char **option, char **env)
 	}
 	if (pc != NULL)
 		execve(pc, option, env);
+	else
+		free(pc);
 	free(pc);
 	free(option);
 	exit(127);

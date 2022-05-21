@@ -6,7 +6,7 @@
 /*   By: jecolmou <jecolmou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 12:51:46 by jecolmou          #+#    #+#             */
-/*   Updated: 2022/05/19 13:55:07 by jecolmou         ###   ########.fr       */
+/*   Updated: 2022/05/21 20:22:30 by jecolmou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	ft_parent_one(t_data *x, char **argv, char **env)
 		ft_if(argv[2], &pc, &option);
 	else
 		ft_else(argv[2], &option, env, &pc);
-	if (!pc || option == NULL)
-		return ;
 	x->child1 = fork();
 	if (x->child1 < 0)
 		ft_error_child(option, pc);
@@ -55,8 +53,6 @@ void	ft_parent_two(t_data *x, char **argv, char **env)
 		ft_if(argv[3], &pc, &option);
 	else
 		ft_else(argv[3], &option, env, &pc);
-	if (!pc || option == NULL)
-		return ;
 	x->child2 = fork();
 	if (x->child2 < 0)
 		ft_error_child(option, pc);
